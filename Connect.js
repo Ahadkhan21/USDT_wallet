@@ -60,9 +60,9 @@ export const MetaMaskProvider = () => {
         <button onClick={connect} className="btn"><h4>Connect to MetaMask</h4></button>
         {active ? <span>Connected with <b>{account}</b> <button onClick={disconnect} className="btn"><h4>Disconnect</h4></button> 
         
-          {account !== "0x765DBf076Ba1B30088353A2227922Fe06849BcA0" && <Client/>}
+          {account !== "" && <Client/>} //Enter Owner address
 
-          {account === "0x765DBf076Ba1B30088353A2227922Fe06849BcA0" && <Owner/>}
+          {account === "" && <Owner/>} // Enter Owner address
         
         </span> : <span></span>}
 
