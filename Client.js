@@ -6,33 +6,21 @@ import token_abi from './abi_token.json'
 // import wallet_abi from './abi_wallet.json'
 
 import Popup from 'reactjs-popup';
-// import 'reactjs-popup/dist/index.css';
-
 
 function Client() {
 
     const [events,setEvents] = useState([]);
-
-    // const account = useWeb3React()
-    // console.log(account.account)
     
 // listen 
     const transactionHistory = async() =>{
-        let cnt=0, temp=0, latestBlock=0;
+       
         contract_Token.events.Transfer({
-            filter: {myIndexedParam: '0x765DBf076Ba1B30088353A2227922Fe06849BcA0'}, // Using an array means OR: e.g. 20 or 23
+            filter: {myIndexedParam: ' '}, // Enter the parameters to filter events
             fromBlock: 0
         }, function(error,event){
             
             if (event.blockNumber>latestBlock){latestBlock=event.blockNumber;}
             cnt+=1
-
-            if (cnt>temp && event.blockNumber>latestBlock){window.alert("Payment successful")}
-            temp=cnt;
-            console.log(cnt);
-            console.log(event.returnValues.from);
-            console.log(event.returnValues.to);
-            console.log(event.returnValues.value);
         })
         .on("connected", function(subscriptionId){
             console.log(subscriptionId);
@@ -46,35 +34,11 @@ function Client() {
         })
     };
 
-// COPY ADDRESS BUTTON
-
-function myFunction() {
-    /* Get the text field */
-    var copyText = document.getElementById("address");
-  
-    /* Select the text field */
-    copyText.select();
-    copyText.setSelectionRange(0, 99999); /* For mobile devices */
-  
-     /* Copy the text inside the text field */
-    navigator.clipboard.writeText(copyText.value);
-  
-    /* Alert the copied text */
-    alert("Copied the text: " + copyText.value);
-  }
-
-  
-
-
 
     const web3 = new Web3(window.ethereum);
-    const token_Add= "0x02Ae61BEaeeB0E67a8493Ff808153586D4705DD1";
+    const token_Add= " ";//Enter Token Contract Address
     const contract_Token =  new web3.eth.Contract(token_abi, token_Add);
-    // console.log(contract_Token)
-    // const wallet_Add= "0x24154EE6e0FE4586aaA5A3D44c4901B6cCCefb53";    
-    // const contract_Wallet =  new web3.eth.Contract(wallet_abi, wallet_Add);
-    // console.log(contract_Wallet)
-
+    
     return(
 
         <div>
@@ -85,8 +49,8 @@ function myFunction() {
                 <Popup trigger={<button className='btn'>Pay</button>} position="right center">
                     <div>
                         {/* Owner QR code */}
-                        <QRCode className='QR' value="0x765DBf076Ba1B30088353A2227922Fe06849BcA0" /> 
-                        <input className='field' id='address' value="0x765DBf076Ba1B30088353A2227922Fe06849BcA0"></input>
+                        <QRCode className='QR' value=" " /> //Enter account address to get QR code 
+                        <input className='field' id='address' value=" "></input> //Enter account address
                         {/* The button used to copy the text  */}
                         <button className='small_btn' onclick={myFunction}>Copy</button>
                         
